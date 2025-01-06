@@ -1,0 +1,10 @@
+/* Ensure the sidebar is displayed */
+.sidebar {
+    display: block !important;
+  }
+  
+  /* Ensure the sidebar is positioned correctly */
+  .sidebar {
+    transform: translateX(0) !important;
+  }
+  

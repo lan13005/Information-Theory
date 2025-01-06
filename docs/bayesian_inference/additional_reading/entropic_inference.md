@@ -1,8 +1,9 @@
 ---
 title: Entropic Inference
 layout: home
+grand_parent: Bayesian Inference
 parent: Additional Reading
-nav_order: 2
+nav_order: 1
 ---
 
 # Maximum Entropy methods

@@ -1,8 +1,8 @@
 ---
 title: Entropy and Surprise
 layout: home
-parent: Information Theory
-nav_order: 2
+parent: Information and Entropy
+nav_order: 1
 ---
 
 ## Information Entropy as a measure of average surprise
@@ -27,6 +27,6 @@ We can subtract the entropy of $$p$$ from the cross-entropy to arrive at the [*K
 
 $$D_{KL} = H(p,q) - H(p) = -\sum_{i}p_{i}\text{log}q_{i} + \sum_{i}p_i\text{log}p_i = -\sum_{i}p_{i}\text{log}\frac{p_{i}}{q_{i}}$$
 
-which measures the expected *additional* surprisal (over the base entropy from $$p$$). The KL divergence is a useful metric in constructing models, like neural networks, that minimize our surprise in how bad they are. It is always non-negative and equals zero if and only if $$p=q$$ everywhere and acts a distance measure between two probability distributions.
+which measures the expected *additional* surprisal (over the base entropy from $$p$$). The KL divergence is a useful metric in constructing models, like neural networks, that minimize our surprise in how bad they are. It is always non-negative and equals zero if and only if $$p=q$$ everywhere and acts as a distance measure between two probability distributions. Note: the word "distance" is used loosely here since the KL divergence is not symmetric. 
 
 Neural networks are *universal function approximators* which, when constructed to model probability distributions, can learn to model some target data distribution by minimizing the KL divergence. Note: the cross entropy is also used as there is only a difference of a constant, $$H(p)$$ which does not change the shape of the optimization landscape. KL-divergence is also used in [variational inference](https://en.wikipedia.org/wiki/Variational_Bayesian_methods).

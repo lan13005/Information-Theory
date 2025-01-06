@@ -1,6 +1,7 @@
 ---
-title: Information Theory
+title: Home
 layout: home
+nav_order: 1
 ---
 
 # Information Theory

@@ -1,8 +1,8 @@
 ---
 title: Connection to Statistical Mechanics
 layout: home
-parent: Information Theory
-nav_order: 1
+parent: Information and Entropy
+nav_order: 2
 ---
 
 ## From Statistical Mechanics to Information Theory
