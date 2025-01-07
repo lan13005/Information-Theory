@@ -111,7 +111,12 @@ A linear response to a Gaussian excitation field will result in a Gaussian field
 
 $$m=Dj$$ 
 
-where $$D=(S^{-1} + R^{\dagger}N^{-1}R^{-1})$$ and $$j=R^{\dagger}N^{-1}d$$ see [Ref.](https://en.wikipedia.org/wiki/Information_field_theory#:~:text=a%20free%20IFT.-,Free%20theory,-%5Bedit%5D) for the derivation. $$m$$ is known as the [generalized Wiener filter](https://en.wikipedia.org/wiki/Generalized_Wiener_filter) solution. In the IFT context, $$j$$ is known as an *information source* and $$D$$ is the *information propagator*. By Taylor expanding the information Hamiltonian, a process with a non-linear $$R$$ or non-Gaussian $$s$$ or $$n$$ can be described by a Hamiltonian that includes an interaction term:
+where $$D=(S^{-1} + R^{\dagger}N^{-1}R^{-1})$$ and $$j=R^{\dagger}N^{-1}d$$ see [Ref.](https://en.wikipedia.org/wiki/Information_field_theory#:~:text=a%20free%20IFT.-,Free%20theory,-%5Bedit%5D) for the derivation. $$m$$ is known as the [generalized Wiener filter](https://en.wikipedia.org/wiki/Generalized_Wiener_filter) solution. In the IFT context, $$j$$ is known as an *information source* and $$D$$ is the *information propagator*. 
+
+Gaussian field priors (even for interacting field theories) are often seen in IFT due to the maximum entropy (MaxEnt) principle which states that among all prior probability distributions that satisfy some set of constraints, the one with the largest entropy should be taken. This principle, for instance, prescibes the use of a uniform distribution when no constraints are present and a Gaussian distribution when only the mean and covariance are known. Entropic methods and Bayesian methods can be unified into the same inference framework by using the [Maximum Entropy Method](additional_reading/entropic_inference.html) which is a descendant of the MaxEnt principle. 
+{: .note}
+
+By Taylor expanding the information Hamiltonian, a process with a non-linear $$R$$ or non-Gaussian $$s$$ or $$n$$ can be described by a Hamiltonian that includes an interaction term:
 
 $$\mathcal{H}(d, s) = \mathcal{H}_{\text{free}}(d, s) + \mathcal{H}_{\text{int}}(d, s)$$
 
