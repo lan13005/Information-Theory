@@ -36,7 +36,7 @@ $$
 \Delta=\frac{p(x\mid\theta+d\theta)-p(x\mid\theta)}{p(x\mid\theta)}=\frac{\partial\log p(x\mid\theta)}{\partial\theta^a} d \theta^a
 $$
 
-Since we are talking about probability distributions one might think that the expectation value of $$\Delta$$, $$\left< \Delta \right>$$, could be used to distinguish local probability distributions but this quantity vanishes identically. The variance, $$\left< \Delta^2 \right> - \left< \Delta \right>^2 = \left< \Delta^2 \right>$$, does not vanish:
+Since we are talking about probability distributions one might think that the expectation value of $$\Delta$$, $$\left< \Delta \right>$$, could be used to distinguish local probability distributions but this quantity vanishes identically, $$\left< \Delta \right>=0$$. The variance, $$\left< \Delta^2 \right> - \left< \Delta \right>^2 = \left< \Delta^2 \right>$$, does not vanish:
 
 $$
 d \ell^2 = \left\langle\Delta^2\right\rangle = \int dx ~ p(x \mid \theta) \frac{\partial \log p(x \mid \theta)}{\partial \theta^a} \frac{\partial \log p(x \mid \theta)}{\partial \theta^b} d \theta^a d \theta^b := g_{ab}\theta^a d \theta^b
@@ -56,6 +56,6 @@ In maximum likelihood estimation (MLE), the cost function is the (negative) log-
 The maximum likelihood solution is locally quadratic (gaussian) whose curvature is given by its **Hessian** which turns out to be equal to the negative Fisher metric (under some regularity conditions). See [this link for the derivation](https://math.stackexchange.com/questions/3585130/why-is-the-fisher-information-matrix-both-an-expected-outer-product-and-a-hessia)
 {: .note }
 
-In this context, the Fisher metric quantifies how much information the random variable $$x$$ (data) provides about the parameter vector $$\theta$$. At the MLE solution, the score (gradient of log-likelihood) fluctuates significantly around zero. A steeper likelihood surface corresponds to a greater variance in the score, which translates to a larger Fisher information metric. This indicates a well-constrained MLE solution, as the parameters are more precisely determined by the data as there is more *information*. 
+In this context, the Fisher metric quantifies how much information the random variable $$x$$ (data) provides about the parameter vector $$\theta$$. At the MLE solution, the score (gradient of log-likelihood) fluctuates significantly around zero. A steeper likelihood surface corresponds to a greater variance in the score, which translates to a larger Fisher information metric. This indicates a well-constrained MLE solution, as the parameters are more precisely determined by the data as there is more *information*. See [Mutual Information Youtube Channel](https://www.youtube.com/watch?v=pneluWj-U-o) for graphical intuition on the Fisher information metric.
 
 [^1]: [The Basics of Information Geometry](https://arxiv.org/pdf/1412.5633)
