@@ -1,0 +1,147 @@
+GENERAL:
+    pwa_manager: GLUEX
+    seed: 42 # RNG seed for reproducible results. Optimizer can get stuck in local minima so freely change this or try multiple values
+    verbosityLevel: 1 # Greater than 0 will print a bit (slightly) more information to screen
+    outputFolder: ??? # Base folder to dump all results into
+    fitResultPath: ${GENERAL.outputFolder}/niftypwa_fit.pkl # Python pickle file dump location, pkl file stores all the information about {input, model, result}
+    maxNIFTyJobs: 1 # Number of NIFTy jobs (not to be confused with MPI processes that the PWA_MANAGER can spawn). For example, if one would like to use multiple NIFTy processes for sampling. Untested.
+    initial_position_std: 0.1 # Random initial position is drawn from your prior model, Gaussian distributed with this standard deviation. See NIFTy/src/minimization/optimize_kl.py for more information
+    # initial_position_template: /w/halld-scshelf2101/lng/WORK/PyAmpTools9/OTHER_CHANNELS/ETAPI0/RESULTS_JAX_P/NiftyFits_a2B_a2pB_a0F/niftypwa_fit.pkl
+    default_yaml: null # values in this file can be used to update a yaml file found at the path specified with this key. Allows reusage.
+
+# Parameters of partial-wave manager class -> these must match the pwa_manager set in GENERAL
+PWA_MANAGER:
+    yaml_file: /w/halld-scshelf2101/lng/WORK/PyAmpTools9/OTHER_CHANNELS/ETAPI0/jax_primary_P.yaml
+
+IFT_MODEL:
+    scale: auto
+    nCalcScale: 500 # reset to 500
+    positiveScale: half_normal
+    useLogNormalPriorSlope: false
+    useGammaFlex: false # true # Gamma distribution typically lighter tails than log-normal (Default)
+    useLaplaceScale: false # should be same as setting positiveScale = sqrt_exp
+    useGammaAsp: false
+    loglogavgslope: [-4.0, 0.1] # [-4.0, 0.1] # (mean, std)
+    flexibility: [0.5, 0.5] # [0.4, 0.8] # [0.5, 0.5] # (mean, std), can be null
+    asperity: [0.5, 0.5] # [0.01, 0.01] # (mean, std), can be null
+    stdOffset: [1.0, 0.001]
+    loglogavgslopeTprime: [-4.0, 0.1] # (mean, std), can be null
+    flexibilityTprime: [0.5, 0.5] # (mean, std), can be null
+    asperityTprime: null # (mean, std), can be null
+    dofdexStye: real_imag # all_free, single_dofdex
+    custom_model_path: ${PARAMETRIC_MODEL}
+    modelName: null
+    res2bkg: 1.0 # 1.0 # N times larger parametric resonance contributions compared to the background
+    bkg2res: 1.0
+    tPrimeFalloff: 0
+    estimateRatios: false
+    perTprimeScaling: true
+    altTprimeNorm: no_norm
+    noInterpScipy: false
+    phaseSpaceMultiplier: null # /w/halld-scshelf2101/lng/WORK/PyAmpTools9/OTHER_CHANNELS/ETAPI0/RESULTS_JAX_P/correct.pkl
+    s0: null
+    productionFactor: GLUEX # need better name cause barrier factor there. Guess its no additional
+    ratio_fluct: null
+    ratio_fluc_std: null
+    ratio_slope: null
+    ratio_stdSlope: null
+    ratio_slopeTprime: null
+    ratio_stdSlopeTprime: null
+    ratio_std_offset: null
+    ratio_std_std_offset: null
+
+PARAMETRIC_MODEL:
+    smoothScales: False
+    parameter_priors:
+        m_a0_980: UnnamedLogNormalOperator(sigma=0.05, mean=0.98)
+        g1_a0_980: UnnamedLogNormalOperator(sigma=0.1, mean=0.35)
+        g2_a0_980: UnnamedLogNormalOperator(sigma=0.1, mean=0.35)
+        m_a2_1320: UnnamedLogNormalOperator(sigma=0.0013 * 30, mean=1.3186)
+        w_a2_1320: UnnamedLogNormalOperator(sigma=0.002 * 30, mean=0.105)
+        m_a2_1700: UnnamedLogNormalOperator(sigma=0.02, mean=1.706)
+        w_a2_1700: UnnamedLogNormalOperator(sigma=0.05, mean=0.380)
+    resonances:
+    - "a0_980":
+        name: "$a_0(980)$"
+        fun: "flatte"
+        preScale: 3.5 # 3.5 # Setting preScale to 0 will tell iftpwa to just ignore it
+        no_bkg: false
+        paras: {"mass": m_a0_980, "g1": g1_a0_980, "g2": g2_a0_980}
+        static_paras: {"mass11": 0.548, "mass12": 0.135, "mass21": 0.495, "mass22": 0.495, channel: 1}
+        waves: ['Sp0-', 'Sp0+']
+    - "a2_1320":
+        name: "$a_2(1320)$"
+        fun: "breitwigner_dyn"
+        preScale: 1.5
+        no_bkg: true # if any parametric models shares ways this can affect the other one also
+        paras: {"mass": m_a2_1320, "width": w_a2_1320}
+        static_paras: {"spin": 2, "mass1": 0.548, "mass2": 0.135}
+        waves: ['Dm2-', 'Dm1-', 'Dp0-', 'Dp1-', 'Dp2-', 'Dm2+', 'Dm1+', 'Dp0+', 'Dp1+', 'Dp2+']
+    - "a2_1700":
+        name: "$a_2(1700)$"
+        fun: "breitwigner_dyn"
+        preScale: 5 # 0.25
+        no_bkg: false # true
+        paras: {"mass": m_a2_1700, "width": w_a2_1700}
+        static_paras: {"spin": 2, "mass1": 0.548, "mass2": 0.135}
+        waves: ['Dm2-', 'Dm1-', 'Dp0-', 'Dp1-', 'Dp2-', 'Dm2+', 'Dm1+', 'Dp0+', 'Dp1+', 'Dp2+']
+
+LIKELIHOOD:
+    approximation: false # no not approximate
+    metric_type: normal #[[2, 'normal'], [18, 'studentt'], 'normal'] #'normal' # can be normal or studentt
+    # Can learn metric, but not recommended
+    learn_metric: false
+    learn_metric_sigma: 1.0
+    subSampleProb: 1.0 # Will resample if less than 1
+    initialSubSampleProb: 1.0 # used for scaling the field 
+    subSampleApproxIndep: false # NOT USED IN RPWA
+    nKeepMetric: 1 # Not sure what this does
+    theta_studentt: null # this has to be set if metric_type is studentt
+    bootstrap: false #[[20,True], False]
+    external_approximation: null
+    dropout_prob: 0.0
+    rotate_phase: null
+    clip_latent: 0
+
+# Parameters of optimization procedure
+OPTIMIZATION:
+    nSamples: [[1, 0], [4, 5], [10, 10], 25] # [[1, 0], 0]
+    nIterGlobal: 1 # 20
+    nMultiStart: 0 # 10
+    multiStartObjective: "maximize|Dp2+_fit_intens" # "minimize|energy"
+    
+    # KL Minimizer
+    algoOptKL: LBFGS
+    nIterMaxOptKL: [[1, 5], 50] # 50 # iteration limit
+    deltaEKL: 0.001
+    convergenceLvlKL: 2
+
+    # Sampling
+    nIterMaxSamples: 1000 # iteration limit
+    deltaESampling: 0.1 # deltaE
+    convergenceLvlSampling: 2 # 1 # convergence_level
+
+    # GeoVI
+    algoOptGeoVI: Newton
+    nIterMaxGeoVI: 10
+    deltaEGeoVI: 0.001 # 0.1
+    convergenceLvlGeoVI: 2 # 1
+
+    #############
+    resume: true
+    #############
+
+    niftyCache: ${GENERAL.outputFolder}/
+    overwriteCache: true
+    sanityChecks: false
+    # provide the names of the latent space variables that should be fixed ['tamps_mass_dir_loglogavgslope'] # examples: ['tamps_mass_dir_loglogavgslope', 'tamps_mass_dir_flexibility', 'tamps_tprime_dir_loglogavgslope', 'tamps_tprime_dir_flexibility', 'tamps_zeromode']
+    constants: [tamps_mass_dir_loglogavgslope]
+
+HYPERPARAMETER_SCANS:
+    n_trials: 20
+    objective: "minimize|energy"
+    sampler: RandomSampler # BruteForceSampler, null
+    GENERAL.seed|suggest_int: "0, 10000, step=1"
+    IFT_MODEL.loglogavgslope.1|suggest_float: "0.01, 0.51, step=0.25"
+    IFT_MODEL.res2bkg|suggest_float: "0.01, 1.01, step=0.25"
+    IFT_MODEL.scale|suggest_int: "1000, 21000, step=4000"
