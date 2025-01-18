@@ -94,7 +94,7 @@ PARAMETRIC_MODEL:
 #   See iftpwa/src/scripts/iftpwa_fit.py for calls to `makeCallableSimple` for parameters with this style
 LIKELIHOOD:
     approximation: false # (bool) approximate the likelihood (with Gaussian, I believe)
-    metric_type: normal # (normal, studentt) type of metric to use for the likelihood
+    metric_type: normal # (normal, student-t) type of metric to use for the likelihood. student-t has heavier tails
     theta_studentt: null # (float) theta paraemeter for student-t distribution, this has to be set if metric_type is studentt
     learn_metric: false # (bool) can learn the metric but not recommended
     learn_metric_sigma: 1.0 # (float)

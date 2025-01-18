@@ -4,6 +4,9 @@ theme: just-the-docs
 math: mathjax
 markdown: kramdown
 
+exclude:
+  - docs/gluex
+
 # url: https://just-the-docs.github.io
 
 search_enabled: true # enable searching across website (true by default)
@@ -12,7 +15,7 @@ search.previews: 3 # Maximum amount of previews per search result, Default: 3
 search.preview_words_before: 5 # Maximum amount of words to display before a matched word in the preview, Default: 5
 search.preview_words_after: 10 # Maximum amount of words to display after a matched word in the preview, Default: 10
 
-# auxillary links shown at the top right on all pages. 
+# auxillary links shown at the top right on all pages.
 aux_links:
   Notes Repository: https://github.com/lan13005/Information-Theory
 
@@ -33,7 +36,6 @@ author: Lawrence Ng
 # Default front-matter
 defaults:
   - scope:
-      path: ""  # Applies to all pages
+      path: "" # Applies to all pages
     values:
       author: "Lawrence Ng"
-
