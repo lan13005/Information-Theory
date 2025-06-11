@@ -45,11 +45,11 @@ $$
 \log p(x) = \underbrace{\mathbb{E}_{q(z)}\left[\log \frac{p(x, z)}{q(z)}\right]}_{\text{ELBO}} + \underbrace{\mathrm{KL}(q(z) \| p(z \mid x))}_{\geq 0}
 $$
 
-For more information on KL divergence, see the [introduction to surprisal](../information_and_entropy/surprisal.md). The marginal likelihood is equal to the ELBO if and only if the variational distribution $$q(z)$$ exactly matches the true posterior $$p(z \mid x)$$.
+For more information on KL divergence, see the [introduction to surprisal](../information_and_entropy/surprisal.html). The marginal likelihood is equal to the ELBO if and only if the variational distribution $$q(z)$$ exactly matches the true posterior $$p(z \mid x)$$.
 
 ## KL Divergence and the Fisher Metric
 
-This metric also arises naturally as the leading term in the local expansion of the Kullback–Leibler (KL) divergence. 
+If you have read [information geometry](../information_geometry.html) it is interesting to make a connection between the KL divergence and the **Fisher information metric**. In the limit where two distributions differ by an infinitesimal change in parameters, the KL divergence between them approximates the squared geodesic distance under the Fisher information metric.
 
 Consider the KL divergence between $$p(x\mid\theta)$$ and a nearby distribution $$p(x\mid\theta + d\theta)$$:
 
