@@ -2,7 +2,7 @@
 title: Information Field Theory
 layout: home
 parent: Bayesian Inference
-nav_order: 1
+nav_order: 2
 ---
 
 # Information Field Theory and Bayesian Analysis

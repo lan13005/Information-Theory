@@ -47,32 +47,8 @@ Since the variance is strictly positive and only vanishes when $$d\theta$$ vanis
 A uniform probability distribution in curved space assigns equal probabilites to equal volumes
 {: .note }
 
-## Connection to Kullback-Leibler Divergence
-
-This metric also arises naturally as the leading term in the local expansion of the Kullback–Leibler (KL) divergence, see [introduction to surprisal](information_and_entropy/surprisal.md). Consider the KL divergence between $$p(x|\theta)$$ and a nearby distribution $$p(x|\theta + d\theta)$$:
-
-$$
-D_{\mathrm{KL}}(p(x|\theta) \| p(x|\theta + d\theta)) = \int dx ~ p(x|\theta) \log \frac{p(x|\theta)}{p(x|\theta + d\theta)}
-$$
-
-Expanding the logarithm to second order:
-
-$$
-\log p(x|\theta + d\theta) = \log p(x|\theta) + d\theta^a \partial_a \log p(x|\theta) + \frac{1}{2} d\theta^a d\theta^b \partial_a \partial_b \log p(x|\theta) + \dots
-$$
-
-where $$\partial_a \equiv \frac{\partial}{\partial \theta^a}$$. Note: $$\log p(x|\theta)$$ cancels with the same term in $$D_{\mathrm{KL}}$$ and the expectation value of the first order expansion term vanishes identically as before. The KL divergence is then:
-
-$$
-\begin{align*}
-D_{\mathrm{KL}}(p(x|\theta) \| p(x|\theta + d\theta)) 
-&= \frac{1}{2} d\theta^a d\theta^b \int dx ~ p(x|\theta) \, \partial_a \log p(x|\theta) \, \partial_b \log p(x|\theta) \\
-&\quad + \dots \\
-&= \frac{1}{2} g_{ab} d\theta^a d\theta^b + o(\|d\theta\|^2)
-\end{align*}
-$$
-
-and is equal to one-half the squared distance on the statistical manifold.
+The distance between two nearby points on the statistical manifold is given by the Fisher metric and is approximately the KL divergence between the two distributions. See [variational inference](bayesian_inference/variational_inference.md) for more details.
+{: .note }
 
 # Inference
 
